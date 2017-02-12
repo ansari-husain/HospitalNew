@@ -798,17 +798,17 @@
     </div>
     <div style="text-align: -webkit-center;padding-top: 80px" id="dataTable">
       <div>
-        <select  ng-model="getState" ng-change="getCity()">
+        <select  ng-model="getState" ng-change="getCities()">
           <option value="">Select State</option>
           <option ng-repeat="state in statesArr" value="{{state}}" >{{state}}</option>
         </select>
-        <select ng-model="getCity" ng-change="getDataTableDetails()">
+        <select ng-model="getCity" ng-change="getDataTableDetails(getState,getCity)">
           <option value="">Select City</option>
           <option ng-if="citiesArr.length !== 0" ng-repeat="city in citiesArr" value="{{city}}" >{{city}}</option>
         </select>
       </div>
 
-      <table class="table-responsive" style="margin-top: 70px" border="2">
+      <table class="table-responsive" style="margin-top: 10px" border="2">
         <thead>
         <tr>
           <th style="background-color: #269abc" rowspan="2"></th>

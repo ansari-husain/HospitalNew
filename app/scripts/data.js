@@ -9,11 +9,12 @@ angular.module("hospitalNewApp")
           $scope.statesArr = [];
           angular.forEach(res.data,function(obj){
             $scope.statesArr.push(obj.state);
+            $scope.getCity = '';
           })
         })
     };
 
-    $scope.getCity = function(){
+    $scope.getCities = function(){
     $scope.getDataTableDetails($scope.getState);
 
     DataTable.getCities($scope.getState)
