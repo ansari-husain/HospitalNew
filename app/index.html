@@ -1,0 +1,1144 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles -->
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/lato.css">
+    <link rel="stylesheet" href="styles/montserrat.css">
+    <link rel="stylesheet" href="styles/style.css">
+    <!-- endbuild -->
+  </head>
+  <body ng-app="hospitalNewApp" id="myPage" data-spy="scroll" data-target=".navbar" ng-controller="userController" ng-init="init()"
+        data-offset="50" >
+    <!--[if lte IE 8]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <!-- Add your site or application content here -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse"
+                  data-target="#myNavbar">
+            <span class="icon-bar"></span> <span class="icon-bar"></span> <span
+            class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#myPage">Logo</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#myPage">HOME</a></li>
+            <li><a href="#band">BAND</a></li>
+            <li><a href="#dataTable">Data Table</a></li>
+            <li><a href="#tour">TOUR</a></li>
+            <li><a href="#contact">CONTACT</a></li>
+            <li class="dropdown"><a class="dropdown-toggle"
+                                    data-toggle="dropdown" href="#">MORE <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Merchandise</a></li>
+                <li><a href="#">Extras</a></li>
+                <li><a href="#">Media</a></li>
+              </ul></li>
+            <li><a href="#"><span class="glyphicon glyphicon-search"></span></a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+      </ol>
+
+      <!-- Wrapper for slides -->
+      <div class="carousel-inner" role="listbox">
+        <div class="item active">
+          <img src="images/image1.jpg" alt="New York" width="1200" height="700">
+          <div class="carousel-caption">
+            <h3>New York</h3>
+            <p>The atmosphere in New York is lorem ipsum.</p>
+          </div>
+        </div>
+
+        <div class="item">
+          <img src="images/image2.jpg" alt="Chicago" width="1200" height="700">
+          <div class="carousel-caption">
+            <h3>Chicago</h3>
+            <p>Thank you, Chicago - A night we won't forget.</p>
+          </div>
+        </div>
+
+        <div class="item">
+          <img src="images/image3.jpg" alt="Los Angeles" width="1200"
+               height="700">
+          <div class="carousel-caption">
+            <h3>LA</h3>
+            <p>Even though the traffic was a mess, we had the best time
+              playing at Venice Beach!</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Left and right controls -->
+      <a class="left carousel-control" href="#myCarousel" role="button"
+         data-slide="prev"> <span class="glyphicon glyphicon-chevron-left"
+                                  aria-hidden="true"></span> <span class="sr-only">Previous</span>
+      </a> <a class="right carousel-control" href="#myCarousel" role="button"
+              data-slide="next"> <span
+      class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+    </div>
+
+    <!-- Container (The Band Section) -->
+    <div id="band" class="container text-center" >
+      <div class="row">
+        <div class="panel-heading">Form F Table</div>
+        <!-- /.panel-heading -->
+        <div class="panel-body">
+          <select ng-model="ms" ng-change="select()">
+            <option ng-repeat="m in hos_id" value="{{m.hos_id}}">{{m.hos_id}}</option>
+          </select>
+          <table width="100%"
+                 class="table table-striped table-bordered table-hover"
+                 id="dataTables-example">
+            <thead>
+            <tr>
+              <th>ID</th>
+              <th>HospitalID</th>
+              <th>PetientID</th>
+              <th>RefferedBy</th>
+              <th>USG_By</th>
+              <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="odd gradeX" ng-repeat="u in result">
+              <td>{{u.id}}</td>
+              <td>{{u.hos_id}}</td>
+              <td>{{u.p_id}}</td>
+              <td>{{u.referred_by}}</td>
+              <td>{{u.usg_by}}</td>
+              <!---  <td><a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Collapsible Group 1</a></td>---->
+              <td><button type="button" class="btn btn-info"
+                          data-toggle="modal" data-target="#myModal"
+                          ng-click="getFormF(u.hos_id,u.p_id)">Open Form F</button></td>
+
+              <div id="myModal" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
+                <div class="modal-dialog">
+
+                  <!-- Modal content-->
+                  <div class="modal-content table-bordered">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title">Form F</h4>
+                    </div>
+                    <div class="modal-body">
+                      <div class="form-group row" align="left">
+                        <label class="lbltitle">Section A:</label> <label
+                        class="section">To be filled for all Diagnostic
+                        Procedure/Test</label>
+                      </div>
+                      <hr>
+                      <div class="form-group row ">
+                        <label align="left" class="col-xs-6 col-form-label dbg">1.Name
+                          and complete address of the Genetic Clinic/Ultrasound
+                          Clinic/Imaging Center</label>
+                        <div class="col-xs-6">
+                          <textarea class="form-control" rows="3">{{listFormF[0].name}}</textarea>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="form-group row">
+                        <label align="left" class="col-xs-3 col-form-label dbg">2.Registration
+                          no.(Under PC & PNDT Act,1994)</label>
+                        <div class="col-xs-3">
+                          <textarea class="form-control" rows="3">{{listFormF[0].username}}</textarea>
+                        </div>
+                        <label align="left" class="col-xs-3 col-form-label dbg">Unique
+                          No.</label>
+                        <div class="col-xs-3">
+                          <input class="form-control" type="text" value=""
+                                 id="example-search-input">
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="form-group row">
+                        <label align="left" class="col-xs-3 col-form-label dbg">3.Patient's
+                          Name:<label class="compulsory">&nbsp;*</label>
+                        </label>
+                        <div class="col-xs-3">
+                          <input class="form-control" type="text"
+                                 value="{{listFormF[1].pname}}" id="example-search-input">
+                        </div>
+                        <label align="left" class="col-xs-3 col-form-label dbg">Age
+                          (Year):<label class="compulsory">&nbsp;*</label>
+                        </label>
+                        <div class="col-xs-3">
+                          <input class="form-control" type="number"
+                                 value="{{listFormF[1].age}}" id="example-search-input">
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="form-group row">
+                        <label align="left" class="col-xs-6 col-form-label dbg">4.Total
+                          Number of leaving Children with sex of each child.<label
+                            class="compulsory">&nbsp;*</label>
+                        </label> <label align="left" class="col-xs-1 col-form-label dbg">Total</label>
+                        <div class="col-xs-1">
+                          <input class="form-control" type="number" value=""
+                                 id="example-search-input">
+                        </div>
+                        <label align="left" class="col-xs-1 col-form-label dbg">Male</label>
+                        <div class="col-xs-1">
+                          <input class="form-control" type="number" value="" id="">
+                        </div>
+                        <label align="left" class="col-xs-1 col-form-label dbg">Female</label>
+                        <div class="col-xs-1">
+                          <input class="form-control" type="number" value="" id="">
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="form-group row">
+                        <label align="left" class="col-xs-6 col-form-label dbg">5.Husband's/Wife's/Father's/Mother's
+                          Name:<label class="compulsory">&nbsp;*</label>
+                        </label>
+                        <div class="col-xs-6">
+                          <input class="form-control" type="text" name="" id=""
+                                 value="">
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="form-group row">
+                        <label align="left" class="col-xs-6 col-form-label dbg">6.Full
+                          postal address of the patient with contact no. if any<label
+                            class="compulsory">&nbsp;*</label>
+                        </label>
+                        <div class="col-xs-6">
+                          <textarea class="form-control" name="" id="" rows="3">{{l[1].address}}</textarea>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="form-group row">
+                        <label align="left" class="col-xs-3 col-form-label dbg">Village/City<label
+                          class="compulsory">&nbsp;*</label></label>
+                        <div class="col-xs-3">
+                          <input class="form-control" type="text" id="" name=""
+                                 value="">
+                        </div>
+                        <div class="col-xs-6" align="left">
+                          <label class="col-form-label dbg"><input
+                            type="radio" name="g" id="example-gender-input">Gujarat</label>&nbsp;&nbsp;&nbsp;
+                          <label class="col-form-label dbg"><input
+                            type="radio" name="g" id="example-gender-input">Out
+                            of Gujarat</label><label class="compulsory">&nbsp;*</label>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="form-group row">
+                        <label align="left" class="col-xs-3 col-form-label dbg">District:<label
+                          class="compulsory">&nbsp;*</label></label>
+                        <div class="col-xs-3">
+                          <select class="form-control" id="example-ms-input">
+                            <option>Select</option>
+                            <option>1</option>
+                          </select>
+                        </div>
+                        <label align="left" class="col-xs-3 col-form-label dbg">Taluka/Block:<label
+                          class="compulsory">&nbsp;*</label></label>
+                        <div class="col-xs-3">
+                          <select class="form-control" id="example-ms-input">
+                            <option>Select</option>
+                            <option>1</option>
+                          </select>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="form-group row">
+                        <label align="left" class="col-xs-3 col-form-label dbg">Telephone
+                          no with STD Code</label>
+                        <div class="col-xs-3">
+                          <input class="form-control" type="text" value="" id="">
+                          <label align="left"><input type="checkbox">Don't
+                            have Phone</label>
+                        </div>
+                        <label align="left" class="col-xs-3 col-form-label dbg">Mobile
+                          No.:</label>
+                        <div class="col-xs-3">
+                          <input class="form-control" type="text" value="" id="">
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="form-group row">
+                        <label align="left" class="col-xs-1 col-form-label dbg">7:</label>
+                        <div class="col-xs-11">
+                          <select class="form-control" id="example-ms-input">
+                            <option>(a)Reffered by(Full name and address of
+                              Doctor(s)/Genetic Counseling Center)</option>
+                            <option>1</option>
+                          </select>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="form-group row">
+                        <label align="left" class="col-xs-3 col-form-label dbg">Doctor/Center
+                          Name:<label class="compulsory">&nbsp;*</label>
+                        </label>
+                        <div class="col-xs-9">
+                          <input class="form-control" type="text" value="" id="">
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="form-group row">
+                        <label align="left" class="col-xs-3 col-form-label dbg">Address:<label
+                          class="compulsory">&nbsp;*</label></label>
+                        <div class="col-xs-3">
+                          <input class="form-control" type="text" id="" name=""
+                                 value="">
+                        </div>
+                        <div class="col-xs-6" align="left">
+                          <label class="col-form-label dbg"><input
+                            type="radio" name="g" id="example-gender-input">Gujarat</label>&nbsp;&nbsp;&nbsp;
+                          <label class="col-form-label dbg"><input
+                            type="radio" name="g" id="example-gender-input">Out
+                            of Gujarat</label><label class="compulsory">&nbsp;*</label>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="form-group row">
+                        <label align="left" class="col-xs-3 col-form-label dbg">District:<label
+                          class="compulsory">&nbsp;*</label></label>
+                        <div class="col-xs-3">
+                          <select class="form-control" id="example-ms-input">
+                            <option>Select</option>
+                            <option>1</option>
+                          </select>
+                        </div>
+                        <label align="left" class="col-xs-3 col-form-label dbg">Taluka:<label
+                          class="compulsory">&nbsp;*</label></label>
+                        <div class="col-xs-3">
+                          <select class="form-control" id="example-ms-input">
+                            <option>Select</option>
+                            <option>1</option>
+                          </select>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="form-group row">
+                        <label align="left" class="col-xs-12 col-form-label dbg">(Referral
+                          slips to be preserved carefully with Form F)<label
+                            class="compulsory">&nbsp;*</label>
+                        </label>
+                      </div>
+                      <hr>
+                      <div class="form-group row">
+                        <label align="left" class="col-xs-3 col-form-label dbg">8.Last
+                          Menstrual Period</label>
+                        <div class="col-xs-3">
+                          <input class="form-control" type="date" value=""
+                                 id="example-search-input">
+                        </div>
+                        <label align="left" class="col-xs-3 col-form-label dbg">Weeks
+                          of Pregnancy</label>
+                        <div class="col-xs-3">
+                          <input class="form-control" type="number" value=""
+                                 id="example-search-input">
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="form-group row" align="left">
+                        <label class="lbltitle">Section B:</label> <label
+                        class="section">To be filled in for performing
+                        non-invasive diagnostic Procedure/Test only</label> <label><input
+                        type="checkbox">(Clilck on checkbox if Section B is
+                        APPLICABLE)</label>
+                      </div>
+                      <hr>
+                      <div class="form-group row">
+                        <label align="left" class="col-xs-6 col-form-label dbg">9.Name
+                          of the doctor performing the procedure/s:<label
+                            class="compulsory">&nbsp;*</label>
+                        </label>
+                        <div class="col-xs-6">
+                          <input class="form-control" type="text" name="" id=""
+                                 value="">
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="form-group row">
+                        <label align="left" class="col-xs-6 col-form-label dbg">10.Indication
+                          for diagnosis procedure (specify with reference to the
+                          request made in the referral slip or in a self-referral
+                          note):<label class="compulsory">&nbsp;*</label> <br>(Ultrasonography
+                          prenatal diagnosis during pregnancy should only be
+                          performed when indicated. The following is the
+                          represntative list of indications for ultrasound during
+                          pregnancy). (Put a "TICK" against the appropriate
+                          indication/s for ultrasound)
+                        </label>
+                        <div class="col-xs-6">
+                          <input class="form-control" type="text" name="" id=""
+                                 value="">
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="form-group row">
+                        <label align="left" class="col-xs-6 col-form-label dbg">11.
+                          Procedures Carried out(Non-Invasive):<label
+                            class="compulsory">&nbsp;*</label>
+                        </label>
+                        <div class="col-xs-6" align="left">
+                          <label class="col-form-label dbg"><input
+                            type="radio" name="g" id="example-gender-input">Ultrasound</label>&nbsp;&nbsp;&nbsp;
+                          <label class="col-form-label dbg"><input
+                            type="radio" name="g" id="example-gender-input">Any
+                            Other(Specify)</label><label class="compulsory">&nbsp;*</label>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="form-group row" align="left">
+                        <label class="lbltitle">IMPORTANT Note:</label> <label
+                        class="">(Ultrasound is not
+                        indicated/advised/performed to determine the sex of fetus
+                        except for diagnosis of sex-linked dieses such as Ducheme
+                        Muscular Dystrophy,Hemophilia A & B etc.)</label>
+                      </div>
+                      <hr>
+                      <div class="form-group row">
+                        <label align="left" class="col-xs-6 col-form-label dbg">12.Date
+                          on witch Declaration of pregnant women/person was obtained:</label>
+                        <div class="col-xs-6">
+                          <input class="form-control" type="date" value=""
+                                 id="example-search-input">
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="form-group row">
+                        <label align="left" class="col-xs-6 col-form-label dbg">13.Date
+                          on witch procedures carried out:</label>
+                        <div class="col-xs-6">
+                          <input class="form-control" type="date" value=""
+                                 id="example-search-input">
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="form-group row ">
+                        <label align="left" class="col-xs-6 col-form-label dbg">14.Result
+                          of non-invasive procedure Carried out (report in the brief
+                          of the test including ultrasound carried out)<label
+                            class="compulsory">&nbsp;*</label>
+                        </label>
+                        <div class="col-xs-6">
+                          <textarea class="form-control" rows="3"></textarea>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="form-group row">
+                        <label align="left" class="col-xs-3 col-form-label dbg">15.The
+                          result of pre-natal diagnostic procedure were conveyed to<label
+                            class="compulsory">&nbsp;*</label>
+                        </label>
+                        <div class="col-xs-3">
+                          <input class="form-control" type="text" value=""
+                                 id="example-search-input">
+                        </div>
+                        <label align="left" class="col-xs-3 col-form-label dbg">result
+                          of pre-natal diagnostic procedure were conveyed on<label
+                            class="compulsory">&nbsp;*</label>
+                        </label>
+                        <div class="col-xs-3">
+                          <input class="form-control" type="date" value=""
+                                 id="example-search-input">
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="form-group row">
+                        <label align="left" class="col-xs-6 col-form-label dbg">16.Any
+                          Indication for MTP as per the abnormality detected in the
+                          diagnostic procedures/tests:<label class="compulsory">&nbsp;*</label>
+                        </label>
+                        <div class="col-xs-6">
+                          <input class="form-control" type="text" name="" id=""
+                                 value="">
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="form-group row">
+                        <label align="left" class="col-xs-3 col-form-label dbg">Date:<label
+                          class="compulsory">&nbsp;*</label></label>
+                        <div class="col-xs-3">
+                          <input class="form-control" type="date" value=""
+                                 id="example-search-input">
+                        </div>
+                        <label align="left" class="col-xs-3 col-form-label dbg">Place</label>
+                        <div class="col-xs-3">
+                          <input class="form-control" type="text" value=""
+                                 id="example-search-input">
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="form-group row ">
+                        <label align="left" class="col-xs-6 col-form-label">Name,
+                          Signature and Registration Number with Seal of the
+                          Gynaecologist/Radiologist/Registered Medical Practitioner
+                          Performing Diagnostic Procedure/s </label>
+                        <div class="col-xs-6">
+                          <textarea class="form-control" rows="3"></textarea>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="form-group row" align="left">
+                        <label class="lbltitle">Section C:</label> <label
+                        class="section">To be filled in for performing
+                        invasive Procedure/Test only</label> <label><input
+                        type="checkbox">(Clilck on checkbox if Section C is
+                        APPLICABLE)</label>
+                      </div>
+                      <hr>
+                      <div class="form-group row">
+                        <label align="left" class="col-xs-6 col-form-label dbg">17.Name
+                          of the doctor performing the procedure/s:<label
+                            class="compulsory">&nbsp;*</label>
+                        </label>
+                        <div class="col-xs-6">
+                          <input class="form-control" type="text" name="" id=""
+                                 value="">
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="form-group row">
+                        <label align="left" class="col-xs-6 col-form-label dbg">18.History
+                          of Genetic/Medical Disease in the family (specify): </label>
+                        <div class="col-xs-6">
+                          <input class="form-control" type="text" name="" id=""
+                                 value="">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label align="left" class="col-xs-12 col-form-label dbg">Basis
+                          of diagnosis ("TICK" on appropriate basis of diagnosis): </label>
+                      </div>
+                      <div class="form-group row">
+                        <label align="left" class="col-xs-12 col-form-label dbg">
+                          (a)<input type="checkbox">Clinical &nbsp; &nbsp;
+                          (b)<input type="checkbox">Bio-chemical &nbsp; &nbsp;
+                          (c)<input type="checkbox">Cytogenetic &nbsp; &nbsp;
+                          (d)<input type="checkbox">Other (e.g Radiaological,Ultrasonography etc-specify)
+                        </label>
+                      </div>
+                      <hr>
+
+
+
+
+
+
+                      <div class="form-group row" align="left">
+                        <label class="lbltitle">Section D:</label> <label
+                        class="section">Declaration</label>
+                      </div>
+                      <hr>
+                      <div class="form-group row" align="left">
+                        <label class="lbltitle">DECLARATION OF THE PERSON
+                          UNDERGOING PRENATAL DIAGNOSTIC TEST/PROCEDURE</label>
+                      </div>
+                      <hr>
+                      <div class="form-group row">
+                        <label align="left" class="col-xs-1 col-form-label dbg">I
+                          Mrs.,Mr. </label>
+                        <div class="col-xs-3">
+                          <input class="form-control" type="text" value=""
+                                 id="example-search-input">
+                        </div>
+                        <label align="left" class="col-xs-2 col-form-label dbg">Declare
+                          that by undergoing</label> </label>
+                        <div class="col-xs-3">
+                          <input class="form-control" type="number" value=""
+                                 id="example-search-input">
+                        </div>
+                        <label align="left" class="col-xs-3 col-form-label dbg">Prenatal
+                          Diagnostic Procedure/Test.I do not want to know the sex of
+                          my foetus.</label> </label>
+                      </div>
+                      <hr>
+                      <div class="form-group row">
+                        <label align="left" class="col-xs-3 col-form-label dbg">Date<label
+                          class="compulsory">&nbsp;*</label></label>
+                        <div class="col-xs-3">
+                          <input class="form-control" type="date" value=""
+                                 id="example-search-input">
+                        </div>
+                        <label align="left" class="col-xs-6 col-form-label dbg">Signature/Thumb
+                          impression of the person undergoing<br>the Prenatal
+                          Diagnostic Test/Procedure.
+                        </label>
+                      </div>
+                      <hr>
+                      <div class="form-group row" align="left">
+                        <label class="lbltitle">In Case of Thumb impression</label>
+                      </div>
+                      <hr>
+                      <div class="form-group row">
+                        <label align="left" class="col-xs-2 col-form-label dbg">Identified
+                          by(Name)<label class="compulsory">&nbsp;*</label>
+                        </label>
+                        <div class="col-xs-3">
+                          <input class="form-control" type="text" value=""
+                                 id="example-search-input">
+                        </div>
+                        <label align="left" class="col-xs-2 col-form-label dbg">Age(In
+                          year)</label>
+                        <div class="col-xs-2">
+                          <input class="form-control" type="number" value=""
+                                 id="example-search-input">
+                        </div>
+                        <label align="left" class="col-xs-1 col-form-label dbg">Sex</label>
+                        <div class="col-xs-2">
+                          <select class="form-control" id="">
+                            <option>Select</option>
+                            <option>Male</option>
+                            <option>Female</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label align="left" class="col-xs-2 col-form-label dbg">Relation
+                          (if any) </label>
+                        <div class="col-xs-3">
+                          <input class="form-control" type="text" value=""
+                                 id="example-search-input">
+                        </div>
+                        <label align="left" class="col-xs-3 col-form-label dbg">Address
+                          and Contact no.</label>
+                        <div class="col-xs-4">
+                          <textarea class="form-control" rows="3"></textarea>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label align="left" class="col-xs-4 col-form-label dbg">Signature
+                          of a person attesting thumb impression</label>
+                        <div class="col-xs-3">
+                          <input class="form-control" type="text" value=""
+                                 id="example-search-input">
+                        </div>
+                        <label align="left" class="col-xs-2 col-form-label dbg">Date</label>
+                        <div class="col-xs-3">
+                          <input class="form-control" type="date" value=""
+                                 id="example-search-input">
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="form-group row" align="left">
+                        <label class="lbltitle">DECLARATION OF DOCTOR/PERSON
+                          CONDUCTIONG PRENATAL DIAGNOSTIC PROCEDURE/TEST</label>
+                      </div>
+                      <hr>
+
+
+                      <!--
+
+                                                                  <div class="form-group row">
+                                                                      <label for="example-search-input"
+                                                                          class="col-xs-2 col-form-label">Search</label>
+                                                                      <div class="col-xs-10">
+                                                                          <input class="form-control" type="search"
+                                                                              value="How do I shoot web" id="example-search-input">
+                                                                      </div>
+                                                                  </div>
+                                                                  <div class="form-group row">
+                                                                      <label for="example-email-input"
+                                                                          class="col-xs-2 col-form-label">Email</label>
+                                                                      <div class="col-xs-10">
+                                                                          <input class="form-control" type="email"
+                                                                              value="bootstrap@example.com" id="example-email-input">
+                                                                      </div>
+                                                                  </div>
+                                                                  <div class="form-group row">
+                                                                      <label for="example-url-input"
+                                                                          class="col-xs-2 col-form-label">URL</label>
+                                                                      <div class="col-xs-10">
+                                                                          <input class="form-control" type="url"
+                                                                              value="https://getbootstrap.com" id="example-url-input">
+                                                                      </div>
+                                                                  </div>
+                                                                  <div class="form-group row">
+                                                                      <label for="example-tel-input"
+                                                                          class="col-xs-2 col-form-label">Telephone</label>
+                                                                      <div class="col-xs-10">
+                                                                          <input class="form-control" type="tel"
+                                                                              value="1-(555)-555-5555" id="example-tel-input">
+                                                                      </div>
+                                                                  </div>
+                                                                  <div class="form-group row">
+                                                                      <label for="example-password-input"
+                                                                          class="col-xs-2 col-form-label">Password</label>
+                                                                      <div class="col-xs-10">
+                                                                          <input class="form-control" type="password" value="hunter2"
+                                                                              id="example-password-input">
+                                                                      </div>
+                                                                  </div>
+                                                                  <div class="form-group row">
+                                                                      <label for="example-number-input"
+                                                                          class="col-xs-2 col-form-label">Number</label>
+                                                                      <div class="col-xs-10">
+                                                                          <input class="form-control" type="number" value="42"
+                                                                              id="example-number-input">
+                                                                      </div>
+                                                                  </div>
+
+                                                                  <div class="form-group row">
+                                                                      <label for="example-gender-input"
+                                                                          class="col-xs-2 col-form-label">Gender</label>
+                                                                      <div class="col-xs-10">
+                                                                          <label><input type="radio" name="g"
+                                                                              id="example-gender-input"> Male</label> <label><input
+                                                                              type="radio" name="g" id="example-gender-input">Female</label>
+                                                                      </div>
+                                                                  </div>
+                                                                  <div class="form-group row">
+                                                                      <label for="example-gender-input"
+                                                                          class="col-xs-2 col-form-label">Hobbies</label>
+                                                                      <div class="col-xs-10">
+                                                                          <label><input type="checkbox"> Remember me</label>
+                                                                          <label><input type="checkbox"> Remember me</label>
+                                                                      </div>
+                                                                  </div>
+                                                                  <div class="form-group row">
+                                                                      <label for="example-ms-input"
+                                                                          class="col-xs-2 col-form-label">MS</label>
+                                                                      <div class="col-xs-10">
+                                                                          <select class="form-control" id="example-ms-input">
+                                                                              <option>1</option>
+                                                                              <option>2</option>
+                                                                              <option>3</option>
+                                                                              <option>4</option>
+                                                                          </select>
+                                                                      </div>
+                                                                  </div>
+                                                                  <div class="form-group row">
+                                                                      <label for="example-datetime-local-input"
+                                                                          class="col-xs-2 col-form-label">Date and time</label>
+                                                                      <div class="col-xs-10">
+                                                                          <input class="form-control" type="datetime-local"
+                                                                              value="2011-08-19T13:45:00"
+                                                                              id="example-datetime-local-input">
+                                                                      </div>
+                                                                  </div>
+                                                                  <div class="form-group row">
+                                                                      <label for="example-date-input"
+                                                                          class="col-xs-2 col-form-label">Date</label>
+                                                                      <div class="col-xs-10">
+                                                                          <input class="form-control" type="date" value="2011-08-19"
+                                                                              id="example-date-input">
+                                                                      </div>
+                                                                  </div>
+                                                                  <div class="form-group row">
+                                                                      <label for="example-month-input"
+                                                                          class="col-xs-2 col-form-label">Month</label>
+                                                                      <div class="col-xs-10">
+                                                                          <input class="form-control" type="month" value="2011-08"
+                                                                              id="example-month-input">
+                                                                      </div>
+                                                                  </div>
+                                                                  <div class="form-group row">
+                                                                      <label for="example-week-input"
+                                                                          class="col-xs-2 col-form-label">Week</label>
+                                                                      <div class="col-xs-10">
+                                                                          <input class="form-control" type="week" value="2011-W33"
+                                                                              id="example-week-input">
+                                                                      </div>
+                                                                  </div>
+                                                                  <div class="form-group row">
+                                                                      <label for="example-time-input"
+                                                                          class="col-xs-2 col-form-label">Time</label>
+                                                                      <div class="col-xs-10">
+                                                                          <input class="form-control" type="time" value="13:45:00"
+                                                                              id="example-time-input">
+                                                                      </div>
+                                                                  </div>
+                                                                  <div class="form-group row">
+                                                                      <label for="example-color-input"
+                                                                          class="col-xs-2 col-form-label">Color</label>
+                                                                      <div class="col-xs-10">
+                                                                          <input class="form-control" type="color" value="#563d7c"
+                                                                              id="example-color-input">
+                                                                      </div>
+                                                                  </div>
+                       -->										</div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default"
+                              data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </tr>
+
+            </tbody>
+          </table>
+          <!-- /.table-responsive -->
+
+        </div>
+        <!-- /.panel-body -->
+      </div>
+
+    </div>
+    <div style="text-align: -webkit-center;padding-top: 80px" id="dataTable">
+
+      <table class="table-responsive" style="margin-top: 70px" border="2">
+        <thead>
+        <tr>
+          <th style="background-color: #269abc" rowspan="2"></th>
+          <th rowspan="2">New Patient <br> Registered</th>
+          <th colspan="2">Live Birth</th>
+          <th rowspan="2">USG done</th>
+          <th rowspan="2">MTP done</th>
+          <th rowspan="2">D & C done</th>
+          <th rowspan="2">indication for termination</th>
+          <th rowspan="2">Unfinished studies</th>
+        </tr>
+        <tr>
+
+          <th>Male</th>
+          <th>Female</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>Current month</td>
+          <td>{{dataTableCurrentMonth.tilldate}}</td>
+          <td>{{dataTableCurrentMonth.male}}</td>
+          <td>{{dataTableCurrentMonth.female}}</td>
+          <td>{{dataTableCurrentMonth.usg_done}}</td>
+          <td></td>
+          <td></td>
+          <td>{{dataTableCurrentMonth.ift}}</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Current year</td>
+          <td>{{dataTableCurrentYear.tilldate}}</td>
+          <td>{{dataTableCurrentYear.male}}</td>
+          <td>{{dataTableCurrentYear.female}}</td>
+          <td>{{dataTableCurrentYear.usg_done}}</td>
+          <td></td>
+          <td></td>
+          <td>{{dataTableCurrentYear.ift}}</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Till Date</td>
+          <td>{{dataTableTillDate.tilldate}}</td>
+          <td>{{dataTableTillDate.male}}</td>
+          <td>{{dataTableTillDate.female}}</td>
+          <td>{{dataTableTillDate.usg_done}}</td>
+          <td></td>
+          <td></td>
+          <td>{{dataTableTillDate.ift}}</td>
+          <td></td>
+        </tr>
+        <tr>
+          <th style="background-color: #269abc">Pregnancy Age <br> wise</th>
+          <th>Ectopic</th>
+          <th colspan="2">IUGS to <br> GS_YS-E</th>
+          <th>Embryo to <br> Foetus</th>
+          <th colspan="2">12 to 17 weeks</th>
+          <th>18 to 30 <br> weeks</th>
+          <th>30+</th>
+        </tr>
+        <tr>
+          <td>Current month</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Current year</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Till Date</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <th style="background-color: #269abc">Pregnancy Age <br> wise</th>
+          <th>Ectopic</th>
+          <th colspan="2">IUGS to <br> GS_YS-E</th>
+          <th>Embryo to <br> Foetus</th>
+          <th colspan="2">12 to 17 weeks</th>
+          <th>18 to 30 <br> weeks</th>
+          <th>30+</th>
+        </tr>
+        <tr>
+          <td>Current month</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Current year</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Till Date</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    </div>
+
+    <!-- Container (The Band Section) -->
+    <!-- <div id="band" class="container text-center">
+          <div class="row">
+              <div id="chartContainer" style="height: 400px; width: 100%;"></div>
+          </div> -->
+    </div>
+
+    <!-- Container (TOUR Section) -->
+    <div id="tour">
+      <div class="container"></div>
+    </div>
+
+    <!-- Container (Contact Section) -->
+    <div id="contact" class="container">
+      <h3 class="text-center">Contact</h3>
+      <p class="text-center">
+        <em>We love our fans!</em>
+      </p>
+
+      <div class="row">
+        <div class="col-md-4">
+          <p>Fan? Drop a note.</p>
+          <p>
+            <span class="glyphicon glyphicon-map-marker"></span>Chicago, US
+          </p>
+          <p>
+            <span class="glyphicon glyphicon-phone"></span>Phone: +00
+            1515151515
+          </p>
+          <p>
+            <span class="glyphicon glyphicon-envelope"></span>Email:
+            mail@mail.com
+          </p>
+        </div>
+        <div class="col-md-8">
+          <div class="row">
+            <div class="col-sm-6 form-group">
+              <input class="form-control" id="name" name="name"
+                     placeholder="Name" type="text" required>
+            </div>
+            <div class="col-sm-6 form-group">
+              <input class="form-control" id="email" name="email"
+                     placeholder="Email" type="email" required>
+            </div>
+          </div>
+				<textarea class="form-control" id="comments" name="comments"
+                  placeholder="Comment" rows="5"></textarea>
+          <br>
+          <div class="row">
+            <div class="col-md-12 form-group">
+              <button class="btn pull-right" type="submit">Send</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+      <h3 class="text-center">From The Blog</h3>
+      <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#home">Mike</a></li>
+        <li><a data-toggle="tab" href="#menu1">Chandler</a></li>
+        <li><a data-toggle="tab" href="#menu2">Peter</a></li>
+      </ul>
+
+      <div class="tab-content">
+        <div id="home" class="tab-pane fade in active">
+          <h2>Mike Ross, Manager</h2>
+          <p>Man, we've been on the road for some time now. Looking
+            forward to lorem ipsum.</p>
+        </div>
+        <div id="menu1" class="tab-pane fade">
+          <h2>Chandler Bing, Guitarist</h2>
+          <p>Always a pleasure people! Hope you enjoyed it as much as I
+            did. Could I BE.. any more pleased?</p>
+        </div>
+        <div id="menu2" class="tab-pane fade">
+          <h2>Peter Griffin, Bass player</h2>
+          <p>I mean, sometimes I enjoy the show, but other times I enjoy
+            other things.</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="googleMap"></div>
+
+
+    <div class="container">
+    <div ui-view=""></div>
+    </div>
+
+
+
+
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+     <script>
+       !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
+       (A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
+       r=n.getElementsByTagName(g)[0],a.src=u,r.parentNode.insertBefore(a,r)
+       }(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+       ga('create', 'UA-XXXXX-X');
+       ga('send', 'pageview');
+    </script>
+
+    <!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-aria/angular-aria.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-messages/angular-messages.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+        <!-- build:js({.tmp,app}) scripts/scripts.js -->
+        <script src="scripts/app.js"></script>
+        <script src="scripts/data.js"></script>
+        <script src="scripts/controllers/main.js"></script>
+        <script src="scripts/controllers/about.js"></script>
+        <script src="scripts/services/dataTableService.js"></script>
+        <!-- endbuild -->
+    <script src="https://maps.googleapis.com/maps/api/js"></script>
+    <script>
+      var myCenter = new google.maps.LatLng(41.878114, -87.629798);
+
+      function initialize() {
+        var mapProp = {
+          center : myCenter,
+          zoom : 12,
+          scrollwheel : false,
+          draggable : false,
+          mapTypeId : google.maps.MapTypeId.ROADMAP
+        };
+
+        var map = new google.maps.Map(document.getElementById("googleMap"),
+          mapProp);
+
+        var marker = new google.maps.Marker({
+          position : myCenter
+        });
+
+        marker.setMap(map);
+      }
+
+      google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+
+    <!-- Footer -->
+    <footer class="text-center">
+      <a class="up-arrow" href="#myPage" data-toggle="tooltip"
+         title="TO TOP"> <span class="glyphicon glyphicon-chevron-up"></span>
+      </a><br> <br>
+
+    </footer>
+
+    <script>
+      $(document).ready(
+        function() {
+          // Initialize Tooltip
+          $('[data-toggle="tooltip"]').tooltip();
+
+          // Add smooth scrolling to all links in navbar + footer link
+          $(".navbar a, footer a[href='#myPage']").on('click',
+            function(event) {
+
+              // Make sure this.hash has a value before overriding default behavior
+              if (this.hash !== "") {
+
+                // Prevent default anchor click behavior
+                event.preventDefault();
+
+                // Store hash
+                var hash = this.hash;
+
+                // Using jQuery's animate() method to add smooth page scroll
+                // The optional number (900) specifies the number of milliseconds it takes to scroll to the specified area
+                $('html, body').animate({
+                  scrollTop : $(this).offset().top
+                }, 900, function() {
+
+                  // Add hash (#) to URL when done scrolling (default click behavior)
+                  window.location.hash = hash;
+                });
+              } // End if
+            });
+        })
+    </script>
+    <script>
+      /* $(document).ready(function() {
+       $('#dataTables-example').DataTable({
+       responsive : true
+       });
+       }); */
+    </script>
+</body>
+</html>
