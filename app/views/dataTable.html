@@ -1,0 +1,291 @@
+<div style="text-align: -webkit-center;padding-top: 80px" id="dataTable" ng-init="init();">
+  <div>
+    <select  ng-model="getState" ng-change="getCities(getState)">
+      <option value="">Select State</option>
+      <option ng-repeat="state in statesArr track by state.state_code" value="{{state.state_code}}" >{{state.state_name}}</option>
+    </select>
+    <select ng-model="getCity" ng-change="getDataTableDetails(getState,getCity)">
+      <option value="">Select City</option>
+      <option ng-if="citiesArr.length !== 0" ng-repeat="city in citiesArr track by city.city_code" value="{{city.city_code}}" >{{city.city_name}}</option>
+    </select>
+  </div>
+
+  <table class="table-responsive" style="margin-top: 10px" border="2">
+    <thead>
+    <tr>
+      <th style="background-color: #269abc" rowspan="2"></th>
+      <th rowspan="2">New Patient <br> Registered</th>
+      <th colspan="2">Live Birth</th>
+      <th rowspan="2">USG done</th>
+      <th rowspan="2">MTP done</th>
+      <th rowspan="2">D & C done</th>
+      <th rowspan="2">indication for termination</th>
+      <th rowspan="2">Unfinished studies</th>
+    </tr>
+    <tr>
+
+      <th>Male</th>
+      <th>Female</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>Previous month</td>
+      <td>{{dataTablePreviousMonth.thismonth }}</td>
+      <td>{{dataTablePreviousMonth.male}}</td>
+      <td>{{dataTablePreviousMonth.female}}</td>
+      <td>{{dataTablePreviousMonth.usg_done}}</td>
+      <td>{{dataTablePreviousMonth.mtp}}</td>
+      <td>{{dataTablePreviousMonth.dnc}}</td>
+      <td>{{dataTablePreviousMonth.ift}}</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Current month</td>
+      <td>{{dataTableCurrentMonth.thismonth }}</td>
+      <td>{{dataTableCurrentMonth.male}}</td>
+      <td>{{dataTableCurrentMonth.female}}</td>
+      <td>{{dataTableCurrentMonth.usg_done}}</td>
+      <td>{{dataTableCurrentMonth.mtp}}</td>
+      <td>{{dataTableCurrentMonth.dnc}}</td>
+      <td>{{dataTableCurrentMonth.ift}}</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Current year</td>
+      <td>{{dataTableCurrentYear.thisyear}}</td>
+      <td>{{dataTableCurrentYear.male}}</td>
+      <td>{{dataTableCurrentYear.female}}</td>
+      <td>{{dataTableCurrentYear.usg_done}}</td>
+      <td>{{dataTableCurrentYear.mtp}}</td>
+      <td>{{dataTableCurrentYear.dnc}}</td>
+      <td>{{dataTableCurrentYear.ift}}</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Till Date</td>
+      <td>{{dataTableTillDate.tilldate}}</td>
+      <td>{{dataTableTillDate.male}}</td>
+      <td>{{dataTableTillDate.female}}</td>
+      <td>{{dataTableTillDate.usg_done}}</td>
+      <td>{{dataTableTillDate.mtp}}</td>
+      <td>{{dataTableTillDate.dnc}}</td>
+      <td>{{dataTableTillDate.ift}}</td>
+      <td>{{dataTableTillDate.unfinished_studies}}</td>
+
+    </tr>
+    <tr>
+      <th style="background-color: #269abc">Pregnancy Age <br> wise</th>
+      <th>Ectopic</th>
+      <th colspan="2">IUGS to <br> GS_YS-E</th>
+      <th>Embryo to <br> Foetus</th>
+      <th colspan="2">12 to 17 weeks</th>
+      <th>18 to 30 <br> weeks</th>
+      <th>30+</th>
+    </tr>
+    <tr>
+      <td>Previous month</td>
+      <td></td>
+      <td colspan="2"></td>
+      <td></td>
+      <td colspan="2">{{dataTablePreviousMonth._12to17}}</td>
+      <td>{{dataTablePreviousMonth._18to30}}</td>
+      <td>{{dataTablePreviousMonth._30plus}}</td>
+    </tr>
+    <tr>
+      <td>Current month</td>
+      <td></td>
+      <td colspan="2"></td>
+      <td></td>
+      <td colspan="2">{{dataTableCurrentMonth._12to17}}</td>
+      <td>{{dataTableCurrentMonth._18to30}}</td>
+      <td>{{dataTableCurrentMonth._30plus}}</td>
+    </tr>
+    <tr>
+      <td>Current year</td>
+      <td></td>
+      <td colspan="2"></td>
+      <td></td>
+      <td colspan="2">{{dataTableCurrentYear._12to17}}</td>
+      <td>{{dataTableCurrentYear._18to30}}</td>
+      <td>{{dataTableCurrentYear._30plus}}</td>
+    </tr>
+    <tr>
+      <td>Till Date</td>
+      <td></td>
+      <td colspan="2"></td>
+      <td></td>
+      <td colspan="2">{{dataTableTillDate._12to17}}</td>
+      <td>{{dataTableTillDate._18to30}}</td>
+      <td>{{dataTableTillDate._30plus}}</td>
+    </tr>
+    <tr>
+      <th style="background-color: #269abc">Mode of <br> Pregnancy</th>
+      <th>Natural</th>
+      <th colspan="2">IUI <br> </th>
+      <th> IVF  </th>
+      <th colspan="2">Surrogacy</th>
+      <th> Unwanted </th>
+      <th> Rape </th>
+    </tr>
+    <tr>
+      <td>Previous month</td>
+      <td>{{dataTablePreviousMonth.modeOfPregnancy.mop_natural}}</td>
+      <td colspan="2"></td>
+      <td></td>
+      <td colspan="2"></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Current month</td>
+      <td>{{dataTableCurrentMonth.modeOfPregnancy.mop_natural}}</td>
+      <td colspan="2"></td>
+      <td></td>
+      <td colspan="2"></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Current year</td>
+      <td>{{dataTableCurrentYear.modeOfPregnancy.mop_natural}}</td>
+      <td colspan="2"></td>
+      <td></td>
+      <td colspan="2"></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Till Date</td>
+      <td>{{dataTableTillDate.modeOfPregnancy.mop_natural}}</td>
+      <td colspan="2"></td>
+      <td></td>
+      <td colspan="2"></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th style="background-color: #269abc">History <br> Wise</th>
+      <th>35+</th>
+      <th colspan="2">Maternal <br>Disease </th>
+      <th> Family <br> Disease  </th>
+      <th colspan="2">Sibling <br>Disease</th>
+      <th> Other <br>Disease </th>
+      <th> High Risk</th>
+    </tr>
+    <tr>
+      <td>Previous month</td>
+      <td></td>
+      <td colspan="2"></td>
+      <td></td>
+      <td colspan="2"></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Current month</td>
+      <td></td>
+      <td colspan="2"></td>
+      <td></td>
+      <td colspan="2"></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Current year</td>
+      <td></td>
+      <td colspan="2"></td>
+      <td></td>
+      <td colspan="2"></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Till Date</td>
+      <td></td>
+      <td colspan="2"></td>
+      <td></td>
+      <td colspan="2"></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th style="background-color: #269abc">Invasive  <br> Procedures</th>
+      <th>Amniocentesis</th>
+      <th colspan="2">Chorionic <br>Villus <br>Sampling </th>
+      <th> Foetal <br>Biopsy  </th>
+      <th colspan="2">Cordocentesis</th>
+      <th> Foetal<br>Reduction </th>
+      <th> Any other</th>
+    </tr>
+    <tr>
+      <td>Current month</td>
+      <td></td>
+      <td colspan="2"></td>
+      <td></td>
+      <td colspan="2"></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Current year</td>
+      <td></td>
+      <td colspan="2"></td>
+      <td></td>
+      <td colspan="2"></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Till Date</td>
+      <td></td>
+      <td colspan="2"></td>
+      <td></td>
+      <td colspan="2"></td>
+      <td></td>
+      <td></td>
+    </tr>
+    </tbody>
+  </table>
+
+  <table ng-if="areas.length > 0" class="table-responsive" style="margin-top: 70px" border="2">
+    <thead>
+    <tr>
+      <th></th>
+      <th >Statistics</th>
+      <th colspan="2">Center wise</th>
+      <th  style="background-color: #000066;color: white ">Area Wise</th>
+      <th>Notifications</th>
+      <th>Search <br> Patient</th>
+      <th></th>
+
+    </tr>
+    <tr>
+      <th style="background-color: #269abc" rowspan="2"></th>
+      <th rowspan="2">New Patient <br> Registered</th>
+      <th colspan="2">Live Birth</th>
+      <th rowspan="2">USG done</th>
+      <th rowspan="2">MTP done</th>
+      <th rowspan="2">D & C done</th>
+      <th rowspan="2">indication for termination</th>
+    </tr>
+    <tr>
+      <th>Male</th>
+      <th>Female</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="area in areas">
+      <td>{{area.area_name}}</td>
+      <td>{{area.tilldate}}</td>
+      <td>{{area.male}}</td>
+      <td>{{area.female}}</td>
+      <td></td>
+      <td>{{area.mtp}}</td>
+      <td>{{area.dnc}}</td>
+      <td>{{area.ift}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

@@ -5,12 +5,6 @@ body {
 	color: #777;
 }
 
-h3, h4 {
-	margin: 10px 0 30px 0;
-	letter-spacing: 10px;
-	font-size: 20px;
-	color: #111;
-}
 
 .container {
 	padding: 80px 120px;
@@ -78,27 +72,6 @@ h3, h4 {
 .thumbnail p {
 	margin-top: 15px;
 	color: #555;
-}
-
-.btn {
-	padding: 10px 20px;
-	background-color: #337ab7;
-	color: #f1f1f1;
-	border-radius: 0;
-	transition: .2s;
-}
-
-.btn:hover, .btn:focus {
-	border: 1px solid #333;
-	background-color: #fff;
-	color: #000;
-}
-
-.modal-header, h4, .close {
-	background-color: #337ab7;
-	color: #fff !important;
-	text-align: center;
-	font-size: 30px;
 }
 
 .modal-header, .modal-body {
@@ -194,6 +167,14 @@ hr{
 	border-color: blue;
 }
 
+.login-panel{
+  box-shadow: 5px 5px 5px #979797;
+  width: 40%;
+  margin:auto;
+}
+.mouseHoverPointer{
+  cursor: pointer;
+}
 .lbltitle{
 	color:  black;
 	font-size: 25px;

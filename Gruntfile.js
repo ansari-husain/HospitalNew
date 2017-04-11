@@ -1,4 +1,4 @@
-// Generated on 2017-02-01 using generator-angular 0.15.1
+// Generated on 2017-04-05 using generator-angular 0.15.1
 'use strict';
 
 // # Globbing
@@ -220,7 +220,7 @@ module.exports = function (grunt) {
             }
           }
       }
-    }, 
+    },
 
     // Renames files for browser caching purposes
     filerev: {
@@ -387,7 +387,15 @@ module.exports = function (grunt) {
           cwd: '.tmp/images',
           dest: '<%= yeoman.dist %>/images',
           src: ['generated/*']
-        }, {
+        },
+          {
+            expand: true,
+            dot: true,
+            cwd: 'bower_components/components-font-awesome/',
+            src: 'fonts/*',
+            dest: '<%= yeoman.dist %>'
+          },
+          {
           expand: true,
           cwd: 'bower_components/bootstrap/dist',
           src: 'fonts/*',

@@ -8,7 +8,14 @@
  * Controller of the hospitalNewApp
  */
 angular.module('hospitalNewApp')
-  .controller('MainCtrl', function () {
+  .controller('MainCtrl', function (Auth, $location) {
 
+    var vm = this;
+    vm.isAdmin = Auth.isAdmin ;
+    vm.isLoggedIn = Auth.isLoggedIn;
 
+    vm.fnLogout = function(){
+      Auth.logout();
+      $location.path('/login');
+    };
   });
